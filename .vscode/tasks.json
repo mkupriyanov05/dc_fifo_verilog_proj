@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "if (Test-Path 'sim/sim.out') { Remove-Item 'sim/sim.out' -Force }; if (Test-Path 'sim/wave.vcd') { Remove-Item 'sim/wave.vcd' -Force }; if (Test-Path 'sim/test_vectors.txt') { Remove-Item 'sim/test_vectors.txt' -Force }",
+            "problemMatcher": []
+        },
+        {
+            "label": "Compile & Run",
+            "type": "shell",
+            "command": "iverilog -o sim/sim.out src/*.v tb/*.v; if ($LASTEXITCODE -eq 0) { chcp 65001 > $null; vvp sim/sim.out }",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Open Waveform",
+            "type": "shell",
+            "command": "gtkwave sim/wave.vcd",
+            "problemMatcher": []
+        }
+    ]
+}

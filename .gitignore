@@ -1,0 +1,9 @@
+/sim
+*.out
+*.vcd
+*.vvp
+*.lxt
+*.lxt2
+*.fst
+
+# .vscode/
