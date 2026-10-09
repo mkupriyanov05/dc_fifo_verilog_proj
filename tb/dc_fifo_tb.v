@@ -35,28 +35,34 @@ module dc_fifo_tb;
     end
 
     initial begin
-        rst = 0;
+        rst = 1;
         data_in = 32'd52;
         enable_in = 0;
         enable_out = 0;
 
-        repeat (3)
+        repeat (1)
             @(negedge clk_in);
-        rst = 1;
+        rst = 0;
 
         repeat (2)
             @(negedge clk_in);
         enable_in = 1;
+            @(negedge clk_in);
+        enable_in = 0;
 
             @(negedge clk_out);
         enable_out = 1;
 
-        repeat (4)
+        repeat (10)
             @(posedge clk_in);
         data_in = 32'd69;
+            @(negedge clk_in);
+        enable_in = 1;
+            @(negedge clk_in);
+        enable_in = 0;
 
 
-        #100;
+        #200;
         $finish;
     end
 
